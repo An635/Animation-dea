@@ -1,0 +1,362 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
+
+:root{
+    --cape: #000;
+    --bone: #ffc;
+    --extra: linear-gradient(#0000 0 0);
+    --b: #25b749;
+}
+
+*{
+    padding:0;
+    margin:0;
+    box-sizing: border-box;
+}
+
+body{
+    height: 100vh;
+    font-family: 'Roboto Condensed', Arial;
+    background: linear-gradient(120deg, rgb(21, 21, 21), rgb(7, 9, 9)); 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.container {
+    position: relative;
+    width: 600px;
+    height: 360px;
+    border: 2px solid;
+    border-radius: 40px;
+    background: linear-gradient(#c9c9, #c9c0), #fff;
+    overflow: hidden;
+    box-shadow: 0 0 50px #c9c, inset 0 0 0 2.5px #000;
+}
+
+.container *,
+.container *::before,
+.container *::after {
+    position: absolute;
+    box-sizing: border-box;
+    pointer-events: none;
+}
+
+@keyframes walkin {
+    0% {
+        translate: -200% 0;
+    }
+    100% {
+        translate: 0 0;
+    }
+}
+
+@keyframes walkout {
+    0% {
+        translate: 0 0;
+    }
+    100% {
+        translate: 250% 0;
+    }
+}
+
+@keyframes shouldersmove {
+    0%,100% {
+        scale: 1 1;
+    }
+    50% {
+        scale: 1 1.03;
+    }
+}
+
+.death {
+    transform-origin: 50% 100%;
+    animation: walkin 3s ease-out forwards,
+        shouldersmove 0.75s 4 ease-out forwards, walkout 3.75s 16s ease-out forwards,
+        shouldersmove 0.75s 5 16s ease-out forwards;
+    width: 45%;
+    height: 75%;
+    bottom: 0;
+    left: 15%;
+    background: linear-gradient(var(--bone) 0 0) 54% 31% / 5% 15%,
+        linear-gradient(var(--bone) 0 0) 61% 31% / 5% 15%,
+        linear-gradient(var(--bone) 0 0) 68% 31% / 5% 15%,
+        conic-gradient(at 50% -30%, #0000 160deg, var(--cape) 0 200deg, #0000 0),
+        linear-gradient(to bottom left, var(--cape) 50%, #0000 0) 10% 0 / 40% 20%,
+        #f000;
+    background-repeat: no-repeat;
+}
+
+@keyframes moveeyes {
+    0%,
+    28% {
+        width: 15%;
+        height: 7%;
+        transform: rotate(0);
+    }
+    30%,
+    40% {
+        width: 15%;
+        height: 8%;
+        transform: rotate(20deg);
+    }
+    42% {
+        width: 15%;
+        height: 7%;
+        transform: rotate(0);
+    }
+    46% {
+        width: 30%;
+        height: 7%;
+    }
+    48% {
+        transform: rotate(0);
+        width: 30%;
+        height: 9%;
+    }
+}
+
+.eyebrow {
+    animation: moveeyes 20s linear forwards;
+    width: 30%;
+    height: 9%;
+    background: var(--bone);
+    top: 15%;
+    left: 45%;
+}
+
+.death::before {
+    content: "";
+    width: 40%;
+    height: 25%;
+    border-radius: 2vmin;
+    top: 10%;
+    left: 40%;
+    background: var(--extra),
+        radial-gradient(circle at 35% 65%, #000 10px, #0000 12px),
+        radial-gradient(circle at 70% 65%, #000 10px, #0000 12px), var(--bone);
+}
+
+@keyframes movescythe {
+    0% {
+        rotate: 0;
+    }
+    100% {
+        rotate: -5deg;
+    }
+}
+
+.death::after {
+    transform-origin: 50% 0;
+    animation: movescythe 0.75s 4 ease-in alternate forwards,
+               movescythe 0.75s 16s 5 ease-in alternate forwards;
+    content: "";
+    width: 60%;
+    height: 100%;
+    border-radius: 100% 0 0 0 / 20%;
+    background: linear-gradient(var(--bone) 0 0) 100% 67% / 18px 2px
+        no-repeat,
+        linear-gradient(var(--bone) 0 0) 100% 70% / 18px 2px no-repeat,
+        linear-gradient(var(--bone) 0 0) 100% 73% / 18px 2px no-repeat,
+        linear-gradient(90deg, #0000 96%, indianred 0),
+        linear-gradient(-185deg, gray 10%, darkgray 0 12%, #0000 0);
+    transform-origin: 100% 100%;
+    transform: rotate(-10deg);
+    bottom: -5%;
+    left: -15%;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 40% 8.25%, 0 100%);
+}
+
+ @keyframes showring {
+    0% {
+        clip-path: polygon(20% 100%, 0% 100%, 0% 100%, 0% 100%, 0% 100%, 0% 100%);
+        opacity: 0;
+    }
+    1% {
+        opacity: 1;
+    }
+    12.5% {
+        clip-path: polygon(20% 100%, 0% 100%, 0% 100%, 0% 0%, 0% 0%, 0% 0%);
+    }
+    25%,
+    75% {
+        clip-path: polygon(20% 100%, 0% 100%, 0% 100%, 0% 0%, 100% 0%, 100% 0%);
+    }
+    100% {
+        clip-path: polygon(20% 100%, 0% 100%, 0% 100%, 0% 0%, 100% 0%, 100% 0%);
+        opacity: 0;
+    }
+} 
+
+.ring { 
+    animation: showring 1s 2.5s linear 1 forwards;
+    width: 30%;
+    height: 40%;
+    bottom: 8%;
+    left: 55%;
+    opacity: 0;
+}
+
+.ring::before {
+    content: "";
+    top: 30%;
+    left: 10%;
+    width: 15%;
+    height: 30%;
+    border-left: 2px solid;
+    border-right: 2px solid;
+    background: linear-gradient(to bottom left, #0000 48%, #000 0 52%, #0000 0);
+    transform: rotate(-20deg) skew(-50deg) rotate(-20deg);
+}
+
+.ring::after {
+    content: "TING";
+    font-size: 20px;
+    background: #00f3;
+    padding-left: 23px;
+    top: 7%;
+    left: 28%;
+    background: linear-gradient(#0000 45%, #000 0 55%, #0000 0) 0 0 / 18px 18px no-repeat,
+        linear-gradient(90deg, #0000 45%, #000 0 55%, #0000 0) 0 0 / 18px 18px no-repeat,
+        linear-gradient(45deg, #0000 48%, #000 0 52%, #0000 0) 0 0 / 18px 18px no-repeat,
+        linear-gradient(-45deg, #0000 48%, #000 0 52%, #0000 0) 0 0 / 18px 18px no-repeat;
+  
+}
+
+@keyframes liftphone {
+    0% {
+        transform: translate(-150%, 150%) rotate(30deg);
+        opacity: 0;
+    }
+    5% {
+        opacity: 1;
+    }
+    100% {
+        transform: translate(0, 0) rotate(15deg);
+        opacity: 1;
+    }
+}
+
+.phone {
+    animation: liftphone 1s 4.33s forwards,
+               liftphone 1.25s 8.5s reverse ease-in forwards;
+    width: 7%;
+    height: 19%;
+    background: #000;
+    border-radius: 10px;
+    top: 60%;
+    left: 55%;
+    transform: rotate(15deg);
+    opacity: 0;
+}
+
+.phone::after {
+    content: "";
+    width: 17.5px;
+    height: 23px;
+    background: repeating-linear-gradient(var(--bone) 0 5px, #0000 0 8px);
+    transform: rotate(5deg);
+    top: 50%;
+    right: -5px;
+}
+
+@keyframes pop {
+    0% {
+        scale: 0;
+    }
+    100% {
+        scale: 1;
+    }
+}
+
+.bubble {
+    animation: pop 0.5s 5.5s cubic-bezier(0.175, 0.885, 0.32, 1.5) forwards,
+               pop 0.25s 8.5s linear reverse forwards;
+    
+    font-size: 25px;
+    background: #00000091;
+    color: #fff;
+    border-radius: 5px;
+    top: 35%;
+    left: 60%;
+    scale: 0;
+}
+
+.bubble::before {
+    content: "";
+    width: 5%;
+    height: 50%;
+    background: linear-gradient(to bottom right, #00000091 50%, #0000 0);
+    top: 100%;
+    left: 1%;;
+    transform: skew(-20deg);
+}
+
+.bubble span {
+     position: relative;
+}
+
+@keyframes spin {
+    0% {
+        transform: translate(-50%, -50%) rotateY(0deg);
+    }
+    100% {
+        transform: translate(-50%, -120%) rotateY(360deg);
+    }
+}
+
+.text{
+    position: absolute;
+    animation: pop 0.5s 5.75s cubic-bezier(0.175, 0.885, 0.32, 1.75) forwards,
+               spin 0.8s 5.75s forwards;
+    scale: 0;
+    width: 50%;
+    background: rgba(0, 0, 0, 0.429);
+    color:black;
+    border-radius: 100px;
+    font-size: 25px;
+    padding-left: 10px;
+    transform: translate(-30%, -140%);
+    display: grid;
+    place-items: center;
+}
+
+@keyframes showsightext {
+    0%,
+    100% {
+        color: #0000;
+    }
+    10%,
+    90% {
+        color: #000;
+    }
+}
+
+.sigh {
+    animation: showsightext 5s 11s linear forwards;
+    font-size: 20px;
+    width: 40%;
+    left: 57%;
+    top: 40%;
+    text-align: center;
+    color: #0000;
+}
+
+@keyframes showsigh {
+    0%,
+    100% {
+        color: #0000;
+    }
+    25%,
+    75% {
+        color: #0008;
+    }
+}
+.sigh::before {
+    animation: showsigh 2s 9.25s linear forwards;
+    content: "...HUMM...!!!";
+    top: 0;
+    left: 0;
+    transform: translate(-30%, -130%) rotate(-10deg);
+    font-size: 10px;
+    color: #0000;
+    font-size: 30px;
+}
